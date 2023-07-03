@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  seq-couchdb:
+    image: public.ecr.aws/medic/cht-couchdb:4.2.0
+    volumes:
+      - ${COUCHDB_DATA:-./srv}:/opt/couchdb/data
+      - cht-credentials:/opt/couchdb/etc/local.d/
+    ports:
+      - "8984:5984"
+    environment:
+      - "COUCHDB_USER=${COUCHDB_USER:-admin}"
+      - "COUCHDB_PASSWORD=${COUCHDB_PASSWORD:-pass}"
+      - "COUCHDB_SECRET=${COUCHDB_SECRET}"
+      - "COUCHDB_UUID=${COUCHDB_UUID}"
+      - "SVC_NAME=${SVC_NAME:-seq-couchdb}"
+      - "COUCHDB_LOG_LEVEL=${COUCHDB_LOG_LEVEL:-debug}"
+
+volumes:
+  cht-credentials:
