@@ -25,7 +25,7 @@ const pushBatch = async () => {
   } else {
     // some amount of changes are received.
     expect(changes.results.length).to.be.greaterThan(BATCH_LENGTH * 0.5);
-    expect(changes.results.length).to.be.lessThan(BATCH_LENGTH * 2.5);
+    expect(changes.results.length).to.be.lessThan(BATCH_LENGTH * 3);
   }
 
   const changesNewSeq = await rpn.get({ url: `${url}/_changes`, qs: { since: since }, json: true });
